@@ -120,6 +120,8 @@ class FixAssertequal(BaseFix):
                      |'assertLess'|'assertLessEqual'
                      )
               """
+    ONE_ARG = "(one=any)"
+    ONE_ARG_COMMA = "arglist< one=any ',' >"
     PATTERN = """
     power<
         'self'
@@ -131,10 +133,15 @@ class FixAssertequal(BaseFix):
                 [',' three=any ]
                 [',']
                 >
-            | one=any
+            | %(one_arg_comma)s
+            | %(one_arg)s
          ) ')' >
     >
-    """ % dict(methods=METHODS)
+    """ % dict(
+        methods=METHODS,
+        one_arg=ONE_ARG,
+        one_arg_comma=ONE_ARG_COMMA,
+    )
 
     def transform(self, node, results):
         """Returns what the above should be replaced with.

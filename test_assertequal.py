@@ -24,6 +24,7 @@ class TestFixAssertEqual(FixerTestCase):
     def test_assert_true_false(self):
         self.check("self.assert_(obj)", "assert obj")
         self.check("self.assertTrue(obj)", "assert obj")
+        self.check("self.assertTrue(obj,)", "assert obj")
         self.check("self.assertFalse(obj)", "assert not obj")
         # This could be better as "assert a not in b", but this is also correct
         self.check("self.assertFalse(a in b)", "assert not a in b")
