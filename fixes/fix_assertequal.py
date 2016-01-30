@@ -108,7 +108,7 @@ class FixAssertequal(BaseFix):
 
     This now also converts a whole bunch of other TestCase assertions!
     """
-    methods = """
+    METHODS = """
               method=('assertEqual'|'assertEquals'
                      |'assertNotEqual'|'assertNotEquals'
                      |'assertTrue'|'assert_'
@@ -124,18 +124,17 @@ class FixAssertequal(BaseFix):
     power<
         'self'
         trailer< '.' %(methods)s >
-        ( trailer<
-            '(' arglist<
+        trailer< '(' (
+            arglist<
                 one=any ','
                 two=any
                 [',' three=any ]
                 [',']
-                > ')'
-          > |
-          trailer< '(' one=any ')' >
-        )
+                >
+            | one=any
+         ) ')' >
     >
-    """ % dict(methods=methods)
+    """ % dict(methods=METHODS)
 
     def transform(self, node, results):
         """Returns what the above should be replaced with.
