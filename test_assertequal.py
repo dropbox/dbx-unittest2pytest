@@ -28,8 +28,16 @@ class TestFixAssertEqual(FixerTestCase):
         self.check("self.assertTrue(obj)", "assert obj")
         self.check("self.assertTrue(obj,)", "assert obj")
         self.check("self.assertFalse(obj)", "assert not obj")
-        # This could be better as "assert a not in b", but this is also correct
-        self.check("self.assertFalse(a in b)", "assert not a in b")
+
+    def test_assert_false_in(self):
+        self.check("self.assertFalse(a in b)", "assert a not in b")
+        self.check("self.assertFalse(a in b,)", "assert a not in b")
+        self.check("self.assertFalse(a in b, 'Message')", "assert a not in b, 'Message'")
+        self.check("self.assertFalse(a in b, 'Message',)", "assert a not in b, 'Message'")
+        self.check("self.assertFalse(a not in b)", "assert a in b")
+        self.check("self.assertFalse(a not in b,)", "assert a in b")
+        self.check("self.assertFalse(a not in b, 'Message')", "assert a in b, 'Message'")
+        self.check("self.assertFalse(a not in b, 'Message',)", "assert a in b, 'Message'")
 
     def test_assert_equal_true_false(self):
         self.check("self.assertEquals(obj, True)", "assert obj")
