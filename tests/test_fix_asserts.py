@@ -3,7 +3,7 @@ from lib2to3.tests.test_fixers import FixerTestCase
 class TestFixAssertEqual(FixerTestCase):
     def setUp(self):
         super(TestFixAssertEqual, self).setUp(
-            fix_list=["assertequal"],
+            fix_list=["asserts"],
             fixer_pkg="unittest2pytest",
         )
 

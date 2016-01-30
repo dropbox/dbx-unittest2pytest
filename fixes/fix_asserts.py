@@ -102,7 +102,7 @@ def assertion(expr, msg, prefix, is_not=False):
 
     return Node(syms.assert_stmt, children, prefix=prefix)
 
-class FixAssertequal(BaseFix):
+class FixAsserts(BaseFix):
     """A Fixer in the lib2to3 framework for converting self.assertEqual or self.assertEquals
     to a regular assert statement. We do this because py.test can inspect types of statements
     if they use regular assert statements (better than the unit test framework can figure out)
@@ -147,7 +147,7 @@ class FixAssertequal(BaseFix):
     NOTIN_PATTERN = "comparison< a=any comp_op<'not' 'in'> b=any >"
 
     def __init__(self, options, log):
-        super(FixAssertequal, self).__init__(options, log)
+        super(FixAsserts, self).__init__(options, log)
         PC = PatternCompiler()
         self.in_pattern = PC.compile_pattern(self.IN_PATTERN)
         self.notin_pattern = PC.compile_pattern(self.NOTIN_PATTERN)
