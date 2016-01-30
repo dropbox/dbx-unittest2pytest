@@ -122,25 +122,25 @@ class FixAssertequal(BaseFix):
               """
     ONE_ARG = "(one=any)"
     ONE_ARG_COMMA = "arglist< one=any ',' >"
+    TWO_ARG = "arglist< one=any ',' two=any [','] >"
+    THREE_ARG = "arglist< one=any ',' two=any ',' three=any [','] >"
     PATTERN = """
     power<
         'self'
         trailer< '.' %(methods)s >
         trailer< '(' (
-            arglist<
-                one=any ','
-                two=any
-                [',' three=any ]
-                [',']
-                >
-            | %(one_arg_comma)s
-            | %(one_arg)s
+            %(three_arg)s |
+            %(two_arg)s |
+            %(one_arg_comma)s |
+            %(one_arg)s
          ) ')' >
     >
     """ % dict(
         methods=METHODS,
         one_arg=ONE_ARG,
         one_arg_comma=ONE_ARG_COMMA,
+        two_arg=TWO_ARG,
+        three_arg=THREE_ARG,
     )
 
     def transform(self, node, results):
