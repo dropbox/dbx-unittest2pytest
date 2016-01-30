@@ -9,13 +9,11 @@ from __future__ import absolute_import
 
 from lib2to3.fixer_base import BaseFix
 from lib2to3.fixer_util import Name, Comma, LParen, RParen
-from lib2to3.main import main
 from lib2to3.pgen2 import token
 from lib2to3.pytree import Leaf, Node
 from lib2to3.pygram import python_symbols as syms
 
 import copy
-import sys
 
 NOT = [Leaf(token.NAME, "not", prefix=" ")]
 EQUALS = [Leaf(token.EQEQUAL, "==", prefix=" ")]
