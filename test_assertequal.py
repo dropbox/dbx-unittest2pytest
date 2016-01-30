@@ -4,7 +4,7 @@ class TestFixAssertEqual(FixerTestCase):
     def setUp(self):
         super(TestFixAssertEqual, self).setUp(
             fix_list=["assertequal"],
-            fixer_pkg=".",
+            fixer_pkg="unittest2pytest",
         )
 
     def test_assert_equal_basic(self):
