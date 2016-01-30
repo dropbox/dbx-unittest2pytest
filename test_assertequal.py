@@ -113,3 +113,14 @@ class TestFixAssertEqual(FixerTestCase):
         b = "self.assertEquals('DontParenthesize', [1, 2, 3, 4])"
         a = "assert 'DontParenthesize' == [1, 2, 3, 4]"
         self.check(b, a)
+
+    def test_assert_equal_multiline_comment(self):
+        # We don't have a good way of handling this case, so bail instead
+        a = """self.assertEqual(
+            # Inline comment
+            True == False,
+            False == True,
+            "Multiline"
+        )
+        """
+        self.unchanged(a)

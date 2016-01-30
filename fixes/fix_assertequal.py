@@ -161,6 +161,10 @@ class FixAssertequal(BaseFix):
         """
         method = results['method'][0].value
 
+        if "\n" in str(node) and "#" in str(node):
+            # Bail on inline comments. We don't know what to do.
+            return None
+
         if method in ('assertTrue', 'assert_'):
             # Replace with a simple assert.
             return assertion(results['one'], results.get('two'), prefix=node.prefix)
