@@ -10,6 +10,7 @@ class TestFixAssertEqual(FixerTestCase):
     def test_assert_equal_basic(self):
         self.check("self.assertEqual(55, 66)", "assert 55 == 66")
         self.check("self.assertEquals(55, 66)", "assert 55 == 66")
+        self.check("self.assertEquals(55, 66,)", "assert 55 == 66")
 
     def test_assert_notEqual_basic(self):
         self.check("self.assertNotEqual(55, 66)", "assert 55 != 66")
@@ -17,6 +18,7 @@ class TestFixAssertEqual(FixerTestCase):
 
     def test_assert_equal_msg(self):
         self.check("self.assertEqual(55, 66, 'Message')", "assert 55 == 66, 'Message'")
+        self.check("self.assertEqual(55, 66, 'Message',)", "assert 55 == 66, 'Message'")
 
     def test_assert_equal_msg_kwd(self):
         self.check("self.assertEqual(55, 66, msg='Message')", "assert 55 == 66, 'Message'")
