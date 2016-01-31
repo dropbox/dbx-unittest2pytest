@@ -39,7 +39,7 @@ assert a is None
 assert not a
 ```
 
-See unit tests for many more examples
+See unit tests for many more examples.
 
 # Usage
 Coming soon
