@@ -37,16 +37,16 @@ PC = PatternCompiler()
 IN_PATTERN = PC.compile_pattern("comparison< a=any 'in' b=any >")
 NOTIN_PATTERN = PC.compile_pattern("comparison< a=any comp_op<'not' 'in'> b=any >")
 NUMBER_PATTERN = PC.compile_pattern("NUMBER | factor< ('+' | '-') NUMBER >")
+NOPAREN_PATTERN = PC.compile_pattern("power | atom")
 
 def make_operand(node):
     """Convert a node into something we can put in a statement.
 
     Adds parentheses if needed.
     """
-    if (isinstance(node, Leaf) or
-            node.type == syms.power or
-            node.type == syms.atom and node.children[0].type != token.STRING):
-        result = [node.clone()]  # No parentheses required in simple stuff
+    if isinstance(node, Leaf) or NOPAREN_PATTERN.match(node):
+        # No parentheses required in simple stuff
+        result = [node.clone()]
     else:
         # Parentheses required in complex statements (eg. assertEqual(x + y, 17))
         result = [LParen(), node.clone(), RParen()]

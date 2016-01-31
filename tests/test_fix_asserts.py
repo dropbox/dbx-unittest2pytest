@@ -12,7 +12,7 @@ class TestFixAssertEqual(FixerTestCase):
         self.check("self.assertEquals(55, 66)", "assert 55 == 66")
         self.check("self.assertEquals(55, 66,)", "assert 55 == 66")
 
-    def test_assert_notEqual_basic(self):
+    def test_assert_not_equal_basic(self):
         self.check("self.assertNotEqual(55, 66)", "assert 55 != 66")
         self.check("self.assertNotEquals(55, 66)", "assert 55 != 66")
 
