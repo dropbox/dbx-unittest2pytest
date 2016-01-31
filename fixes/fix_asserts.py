@@ -227,7 +227,7 @@ class FixAsserts(BaseFix):
             # CPython caches "small" integers for performance.
             if method == 'assertIs':
                 method = 'assertEqual'
-            elif method =='assertIsNot':
+            elif method == 'assertIsNot':
                 method = 'assertNotEqual'
 
         comp_map = {
