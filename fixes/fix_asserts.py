@@ -145,12 +145,14 @@ class FixAsserts(BaseFix):
     )
     IN_PATTERN = "comparison< a=any 'in' b=any >"
     NOTIN_PATTERN = "comparison< a=any comp_op<'not' 'in'> b=any >"
+    NUMBER_PATTERN = "NUMBER | factor< ('+' | '-') NUMBER >"
 
     def __init__(self, options, log):
         super(FixAsserts, self).__init__(options, log)
         PC = PatternCompiler()
         self.in_pattern = PC.compile_pattern(self.IN_PATTERN)
         self.notin_pattern = PC.compile_pattern(self.NOTIN_PATTERN)
+        self.number_pattern = PC.compile_pattern(self.NUMBER_PATTERN)
 
     def transform(self, node, results):
         """Returns what the above should be replaced with.
@@ -164,6 +166,8 @@ class FixAsserts(BaseFix):
         if "\n" in str(node) and "#" in str(node):
             # Bail on inline comments. We don't know what to do.
             return None
+
+        # Handle all the one-arg cases
 
         if method in ('assertTrue', 'assert_'):
             # Replace with a simple assert.
@@ -183,13 +187,21 @@ class FixAsserts(BaseFix):
             return assertion(results['one'], results.get('two'), prefix=node.prefix,
                              is_not=True)
 
+        if method == 'assertIsNone':
+            return assert_comparison(results['one'], IS, NONE,
+                                     results.get('two'), prefix=node.prefix)
+        if method == 'assertIsNotNone':
+            return assert_comparison(results['one'], IS_NOT, NONE,
+                                     results.get('two'), prefix=node.prefix)
+
+        # Now handle the 2 arg cases
+
         if method in ('assertEqual', 'assertEquals'):
             # There are a couple of cases here.
             #   If either side is a True or False we replace it with a simple assert.
             #      i.e. "assert lhs" or "assert not lhs"
             #   If either side is None we use "assert lhs|rhs is None"
             #   Otherwise we do "assert lhs == rhs"
-            comp = EQUALS
             lhs = results['one']
             rhs = results['two']
 
@@ -203,19 +215,22 @@ class FixAsserts(BaseFix):
                                  prefix=node.prefix, is_not=(rhs == FALSE))
 
             if NONE in (lhs, rhs):
-                comp = IS
+                method = 'assertIs'
 
-            return assert_comparison(lhs, comp, rhs,
-                                     results.get('three'), prefix=node.prefix)
+            # Fall through to assert_comparison logic
 
-        if method == 'assertIsNone':
-            return assert_comparison(results['one'], IS, NONE,
-                                     results.get('two'), prefix=node.prefix)
-        if method == 'assertIsNotNone':
-            return assert_comparison(results['one'], IS_NOT, NONE,
-                                     results.get('two'), prefix=node.prefix)
+        if self.number_pattern.match(results['one']) or self.number_pattern.match(results['two']):
+            # Don't use "is" comparison to integers.
+            # It only works by accident in cpython for small integers (-6 <= x <= 255)
+            # CPython caches "small" integers for performance.
+            if method == 'assertIs':
+                method = 'assertEqual'
+            elif method =='assertIsNot':
+                method = 'assertNotEqual'
 
         comp_map = {
+            'assertEqual': EQUALS,
+            'assertEquals': EQUALS,
             'assertNotEqual': NOTEQUALS,
             'assertNotEquals': NOTEQUALS,
             'assertGreater': GREATER,

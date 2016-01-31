@@ -55,6 +55,16 @@ class TestFixAssertEqual(FixerTestCase):
     def test_assert_is_not_none(self):
         self.check("self.assertIsNotNone(obj)", "assert obj is not None")
 
+    def test_assert_is_integer(self):
+        # Don't use "is" comparison to integers.
+        # It only works by accident in cpython for small integers (-6 <= x <= 255)
+        # CPython caches "small" integers for performance.
+        self.check("self.assertIs(obj, 22)", "assert obj == 22")
+        self.check("self.assertIs(obj, +22)", "assert obj == (+22)")
+        self.check("self.assertIs(obj, -10)", "assert obj == (-10)")
+        self.check("self.assertIsNot(obj, -10)", "assert obj != (-10)")
+        self.check("self.assertIs(obj, 'str')", "assert obj is 'str'")
+
     def test_comparisons(self):
         comp_map = {
             'assertGreater': '>',
