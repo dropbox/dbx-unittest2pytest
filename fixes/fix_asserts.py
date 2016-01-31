@@ -33,6 +33,11 @@ LESS_EQUAL = [Leaf(token.LESSEQUAL, "<=", prefix=" ")]
 TRUE = Name("True")
 FALSE = Name("False")
 
+PC = PatternCompiler()
+IN_PATTERN = PC.compile_pattern("comparison< a=any 'in' b=any >")
+NOTIN_PATTERN = PC.compile_pattern("comparison< a=any comp_op<'not' 'in'> b=any >")
+NUMBER_PATTERN = PC.compile_pattern("NUMBER | factor< ('+' | '-') NUMBER >")
+
 def make_operand(node):
     """Convert a node into something we can put in a statement.
 
@@ -143,16 +148,9 @@ class FixAsserts(BaseFix):
         two_arg=TWO_ARG,
         three_arg=THREE_ARG,
     )
-    IN_PATTERN = "comparison< a=any 'in' b=any >"
-    NOTIN_PATTERN = "comparison< a=any comp_op<'not' 'in'> b=any >"
-    NUMBER_PATTERN = "NUMBER | factor< ('+' | '-') NUMBER >"
 
     def __init__(self, options, log):
         super(FixAsserts, self).__init__(options, log)
-        PC = PatternCompiler()
-        self.in_pattern = PC.compile_pattern(self.IN_PATTERN)
-        self.notin_pattern = PC.compile_pattern(self.NOTIN_PATTERN)
-        self.number_pattern = PC.compile_pattern(self.NUMBER_PATTERN)
 
     def transform(self, node, results):
         """Returns what the above should be replaced with.
@@ -175,11 +173,11 @@ class FixAsserts(BaseFix):
         if method == 'assertFalse':
             in_results = {}
             # Handle "self.assertFalse(a in b)" -> "assert a not in b"
-            if self.in_pattern.match(results['one'], in_results):
+            if IN_PATTERN.match(results['one'], in_results):
                 return assert_comparison(in_results['a'], NOT_IN, in_results['b'],
                                          results.get('two'), prefix=node.prefix)
             # Handle "self.assertFalse(a not in b)" -> "assert a in b"
-            if self.notin_pattern.match(results['one'], in_results):
+            if NOTIN_PATTERN.match(results['one'], in_results):
                 return assert_comparison(in_results['a'], IN, in_results['b'],
                                          results.get('two'), prefix=node.prefix)
 
@@ -219,7 +217,7 @@ class FixAsserts(BaseFix):
 
             # Fall through to assert_comparison logic
 
-        if self.number_pattern.match(results['one']) or self.number_pattern.match(results['two']):
+        if NUMBER_PATTERN.match(results['one']) or NUMBER_PATTERN.match(results['two']):
             # Don't use "is" comparison to integers.
             # It only works by accident in cpython for small integers (-6 <= x <= 255)
             # CPython caches "small" integers for performance.
