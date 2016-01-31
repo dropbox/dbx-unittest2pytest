@@ -6,8 +6,8 @@ setup(
     description='Convert unittest asserts to pytest rewritten asserts',
     keywords='stopwatch dropbox',
     license='Apache License 2.0',
-    author='Nipunn Koorapati',
-    author_email='nipunn@dropbox.com',
+    author='Nipunn Koorapati, David Euresti',
+    author_email='nipunn@dropbox.com, david@ropbox.com',
     py_modules=['unittest2pytest'],
     url='https://github.com/dropbox/unittest2pytest',
 
