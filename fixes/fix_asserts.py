@@ -101,7 +101,11 @@ def assertion(expr, msg, prefix, is_not=False):
         children.append(Leaf(token.NAME, "not", prefix=" "))
 
     # Single space after assert. Maintain the indentation/newline of the expr.
-    expr.prefix = " "
+    if expr.prefix == "":
+        expr.prefix = " "
+    for sub_node in expr.children:
+        if '\n' in sub_node.prefix:
+            sub_node.prefix = " \\" + sub_node.prefix
     children.append(expr.clone())
     children.extend(make_assert_msg(msg))
 

@@ -93,6 +93,25 @@ class TestFixAssertEqual(FixerTestCase):
         """
         self.check(b, a)
 
+    def test_assert_true_multiline(self):
+        b = """self.assertTrue(a or
+                               b)
+        """
+        a = """assert a or \\
+                               b
+        """
+        self.check(b, a)
+
+    def test_assert_true_multiline_empty_first(self):
+        b = """self.assertTrue(
+            a or b
+        )
+        """
+        a = """assert \\
+            a or b
+        """
+        self.check(b, a)
+
     def test_assert_equal_multiline_trailing_comma(self):
         b = """self.assertEqual(
             True == False,
