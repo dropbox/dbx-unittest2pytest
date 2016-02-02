@@ -10,6 +10,7 @@ setup(
     author_email='nipunn@dropbox.com, david@dropbox.com',
     packages=find_packages(exclude=['tests']),
     url='https://github.com/dropbox/unittest2pytest',
+    zip_safe=False,
 
     entry_points= {
         'console_scripts': ['unittest2pytest=unittest2pytest.main:main'],
