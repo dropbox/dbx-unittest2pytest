@@ -42,7 +42,18 @@ assert not a
 See unit tests for many more examples.
 
 # Usage
-Coming soon
+```
+unittest2pytest --help
+unittest2pytest --fix=asserts <filename/dirnames>
+```
+Run 4x parallel.
+```
+unittest2pytest --fix=asserts -j4 [filename/dirnames]
+```
+Write back to original files.
+```
+unittest2pytest --fix=asserts -w [filename/dirnames]
+```
 
 # Contributing
 Contributions are welcome. Tests can be run with [tox][tox]. Lint with [flake8][flake8]
