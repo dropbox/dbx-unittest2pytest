@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
     name="unittest2pytest",
@@ -8,8 +8,12 @@ setup(
     license='Apache License 2.0',
     author='Nipunn Koorapati, David Euresti',
     author_email='nipunn@dropbox.com, david@dropbox.com',
-    py_modules=['unittest2pytest'],
+    packages=find_packages(exclude=['tests']),
     url='https://github.com/dropbox/unittest2pytest',
+
+    entry_points= {
+        'console_scripts': ['unittest2pytest=unittest2pytest.main:main'],
+    },
 
     install_requires=[],
 )
