@@ -12,7 +12,7 @@ setup(
     url='https://github.com/dropbox/unittest2pytest',
     zip_safe=False,
 
-    entry_points= {
+    entry_points={
         'console_scripts': ['unittest2pytest=unittest2pytest.main:main'],
     },
 
