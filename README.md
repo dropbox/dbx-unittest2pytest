@@ -8,23 +8,26 @@ https://pytest.org/latest/assert.html#advanced-assertion-introspection
 Check out this blog post detailing how it works.
 http://pybites.blogspot.ie/2011/07/behind-scenes-of-pytests-new-assertion.html
 
+tl;dr
+If you are using py.test, then "assert a == b" is better than "self.assertEqual(a, b)"
+
 # What's the advantage?
 
-Before:
-```python
+Pytest output before:
+```
 test/test_login.py:80: in test
     self.assertEquals(login.call_count, 1)
 E   AssertionError: 0 != 1
     assert login.call_count == 1
 ```
-After:
-```python
+Pytest output after:
+```
 test/test_login.py:80: in test
 E   AssertionError: assert 0 == 1
 E    +  where 0 = <MagicMock name='mock.desktop_login.login' id='140671857679512'>.call_count
 ```
 
-# What happens to my code?
+# What happens to my test code?
 
 Before:
 ```python
