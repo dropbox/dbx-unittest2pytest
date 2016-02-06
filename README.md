@@ -60,6 +60,7 @@ unittest2pytest --fix=asserts -w [filename/dirnames]
 
 # Contributing
 Contributions are welcome. Tests can be run with [tox][tox]. Lint with [flake8][flake8]
+You'll have to agree to Dropbox's [CLA][CLA].
 
 #Issues
 If you encounter any problems, please [file an issue][issues] along with a detailed description.
@@ -67,3 +68,4 @@ If you encounter any problems, please [file an issue][issues] along with a detai
 [flake8]: https://flake8.readthedocs.org/en/latest/
 [issues]: https://github.com/dropbox/unittest2pytest/issues
 [tox]: https://tox.readthedocs.org/en/latest/
+[CLA]: https://opensource.dropbox.com/cla/
