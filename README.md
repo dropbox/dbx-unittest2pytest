@@ -1,4 +1,4 @@
-# unittest2pytest
+# unittest2pytest [![Build Status](https://travis-ci.org/dropbox/unittest2pytest.svg?branch=master)](https://travis-ci.org/dropbox/unittest2pytest)
 
 Convert unittest asserts to pytest rewritten asserts.
 
