@@ -47,15 +47,15 @@ See unit tests for many more examples.
 # Usage
 ```
 unittest2pytest --help
-unittest2pytest --fix=asserts <filename/dirnames>
+unittest2pytest --fix=self_assert <filename/dirnames>
 ```
 Run 4x parallel.
 ```
-unittest2pytest --fix=asserts -j4 [filename/dirnames]
+unittest2pytest --fix=self_assert -j4 [filename/dirnames]
 ```
 Write back to original files.
 ```
-unittest2pytest --fix=asserts -w [filename/dirnames]
+unittest2pytest --fix=self_assert -w [filename/dirnames]
 ```
 
 # Contributing
