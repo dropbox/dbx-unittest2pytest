@@ -1,11 +1,11 @@
-# unittest2pytest [![Build Status](https://travis-ci.org/dropbox/unittest2pytest.svg?branch=master)](https://travis-ci.org/dropbox/unittest2pytest)
+# dbx-unittest2pytest [![Build Status](https://travis-ci.org/dropbox/unittest2pytest.svg?branch=master)](https://travis-ci.org/dropbox/unittest2pytest)
 
 ## Warning: this is not the official unittest2pytest!
 
 Dropbox developed this package in parallel with (what became) the official `pytest-dev` package `unittest2pytest`, that
 has the same name and does the same thing. It's the one that has the name `unittest2pytest` on PyPI, and it can convert
 a few more assertions. Check it out [on Github](https://github.com/pytest-dev/unittest2pytest) or
-[on PyPI](https://pypi.python.org/pypi/unittest2pytest).
+[on PyPI](https://pypi.python.org/pypi/unittest2pytest). We've since renamed the project dbx-unittest2pytest to avoid confusion
 
 # Description
 
@@ -55,16 +55,16 @@ See unit tests for many more examples.
 
 # Usage
 ```
-unittest2pytest --help
-unittest2pytest --fix=asserts <filename/dirnames>
+dbx-unittest2pytest --help
+dbx-unittest2pytest --fix=asserts <filename/dirnames>
 ```
 Run 4x parallel.
 ```
-unittest2pytest --fix=asserts -j4 [filename/dirnames]
+dbx-unittest2pytest --fix=asserts -j4 [filename/dirnames]
 ```
 Write back to original files.
 ```
-unittest2pytest --fix=asserts -w [filename/dirnames]
+dbx-unittest2pytest --fix=asserts -w [filename/dirnames]
 ```
 
 # Contributing
@@ -75,6 +75,6 @@ You'll have to agree to Dropbox's [CLA][CLA].
 If you encounter any problems, please [file an issue][issues] along with a detailed description.
 
 [flake8]: https://flake8.readthedocs.org/en/latest/
-[issues]: https://github.com/dropbox/unittest2pytest/issues
+[issues]: https://github.com/dropbox/dbx-unittest2pytest/issues
 [tox]: https://tox.readthedocs.org/en/latest/
 [CLA]: https://opensource.dropbox.com/cla/

@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="unittest2pytest",
+    name="dbx-unittest2pytest",
     version="1.0",
     description='Convert unittest asserts to pytest rewritten asserts',
     keywords='unittest pytest dropbox',
@@ -9,7 +9,7 @@ setup(
     author='Nipunn Koorapati, David Euresti',
     author_email='nipunn@dropbox.com, david@dropbox.com',
     packages=find_packages(exclude=['tests']),
-    url='https://github.com/dropbox/unittest2pytest',
+    url='https://github.com/dropbox/dbx-unittest2pytest',
     zip_safe=False,
 
     entry_points={
