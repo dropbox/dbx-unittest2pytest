@@ -1,5 +1,14 @@
 # unittest2pytest [![Build Status](https://travis-ci.org/dropbox/unittest2pytest.svg?branch=master)](https://travis-ci.org/dropbox/unittest2pytest)
 
+## Warning: this is not the official unittest2pytest!
+
+Dropbox developed this package in parallel with (what became) the official `pytest-dev` package `unittest2pytest`, that
+has the same name and does the same thing. It's the one that has the name `unittest2pytest` on PyPI, and it can convert
+a few more assertions. Check it out [on Github](https://github.com/pytest-dev/unittest2pytest) or
+[on PyPI](https://pypi.python.org/pypi/unittest2pytest).
+
+# Description
+
 Convert unittest asserts to pytest rewritten asserts.
 
 py.test supports advanced assertion introspection, allowing it to provide more detailed error messages.
