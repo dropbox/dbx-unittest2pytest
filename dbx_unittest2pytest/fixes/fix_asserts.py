@@ -1,5 +1,5 @@
 """Fixer that tranlslates unittest assertions to python assertions.
-https://github.com/dropbox/unittest2pytest
+https://github.com/dropbox/dbx-unittest2pytest
 
 E.g.
    self.assert_(x)  -> assert x

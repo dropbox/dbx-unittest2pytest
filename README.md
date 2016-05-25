@@ -1,4 +1,4 @@
-# dbx-unittest2pytest [![Build Status](https://travis-ci.org/dropbox/unittest2pytest.svg?branch=master)](https://travis-ci.org/dropbox/unittest2pytest)
+# dbx-unittest2pytest [![Build Status](https://travis-ci.org/dropbox/dbx-unittest2pytest.svg?branch=master)](https://travis-ci.org/dropbox/dbx-unittest2pytest)
 
 ## Warning: this is not the official unittest2pytest!
 

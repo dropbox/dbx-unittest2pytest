@@ -13,7 +13,7 @@ setup(
     zip_safe=False,
 
     entry_points={
-        'console_scripts': ['unittest2pytest=unittest2pytest.main:main'],
+        'console_scripts': ['dbx-unittest2pytest=dbx_unittest2pytest.main:main'],
     },
 
     install_requires=[],
