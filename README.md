@@ -71,7 +71,7 @@ dbx-unittest2pytest --fix=asserts -w [filename/dirnames]
 Contributions are welcome. Tests can be run with [tox][tox]. Lint with [flake8][flake8]
 You'll have to agree to Dropbox's [CLA][CLA].
 
-#Issues
+# Issues
 If you encounter any problems, please [file an issue][issues] along with a detailed description.
 
 [flake8]: https://flake8.readthedocs.org/en/latest/
